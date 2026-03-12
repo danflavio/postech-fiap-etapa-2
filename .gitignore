@@ -1,0 +1,18 @@
+# Dependências (reproduzíveis via npm install)
+node_modules/
+
+# Variáveis de ambiente e Segredos (Segurança Crítica)
+.env
+.env.local
+
+# Logs e diagnósticos
+npm-debug.log*
+*.log
+
+# Arquivos de sistema (Junk files)
+.DS_Store
+Thumbs.db
+
+# Pastas de build (caso use compiladores no futuro)
+dist/
+build/
