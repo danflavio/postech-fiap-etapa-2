@@ -1,4 +1,4 @@
-# 🚀 Tech Challenge - Blogging para Professores
+# 🚀 Tech Challenge - Refatorando o Backend do Blogging
 
 > **Etapa 2: Persistência de Dados e Qualidade de Software**
 
@@ -143,7 +143,8 @@ npm run test:coverage
   DELETE            `/posts/:id`         Remove uma        204 No Content
                                          postagem do       
                                          sistema           
-  --------------------------------------------------------------------------
+------------------------------------------------------------------------
+
 
 ------------------------------------------------------------------------
 
