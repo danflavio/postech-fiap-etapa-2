@@ -3,16 +3,17 @@ services:
     build: .
     container_name: tech_challenge_app_etapa_2
     ports:
-      - "${PORT}:${PORT}"
+      - "${PORT:-3000}:${PORT:-3000}"
     volumes:
       - .:/app
       - /app/node_modules
     environment:
-      - PORT=${PORT}
-      - DB_HOST=db
-      - DB_USER=user
-      - DB_PASS=password # Deve ser igual ao do serviço db
-      - DB_NAME=blogging_db
+      - PORT=${PORT:-3000}
+      - DB_HOST=${DB_HOST_DOCKER:-db}
+      - DB_USER=${DB_USER:-user}
+      - DB_PASS=${DB_PASSWORD:-password}
+      - DB_NAME=${DB_NAME:-blogging_db}
+      - DB_PORT=${DB_PORT:-5432}
     depends_on:
       - db
 
@@ -20,15 +21,14 @@ services:
     image: postgres:15
     container_name: tech_challenge_db
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: blogging_db
+      POSTGRES_USER: ${DB_USER:-user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: ${DB_NAME:-blogging_db}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:5432"
 
-# ESSENCIAL: Declara o volume para os dados não sumirem
 volumes:
   pgdata:
