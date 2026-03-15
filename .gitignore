@@ -1,13 +1,18 @@
 # Dependências (reproduzíveis via npm install)
 node_modules/
 
+# Relatórios de Testes
+coverage/
+*.lcov
+
 # Variáveis de ambiente e Segredos (Segurança Crítica)
 .env
 .env.local
 
-# Logs e diagnósticos
+# Docker e Logs
 npm-debug.log*
-*.log
+.docker-data/
+pgdata/
 
 # Arquivos de sistema (Junk files)
 .DS_Store

@@ -1,5 +1,6 @@
 import request from 'supertest';
 import app from '../src/index.js';
+import pool from '../src/config/db.js';
 
 describe('Testes de Integração - Funcionalidade de Postagens', () => {
 
@@ -28,12 +29,12 @@ describe('Testes de Integração - Funcionalidade de Postagens', () => {
             title: 'Desafio FIAP - Etapa 2'
         };
 
-        const response = (await request(app).post('/posts')).send(newPost);
+        const response = await request(app).post('/posts').send(newPost);
         expect(response.status).toBe(400);
         expect(response.body).toHaveProperty('message');
     });
+    
 });
-
 
 describe('Testes de Busca e Filtros', () => {
 
@@ -64,3 +65,19 @@ describe('Testes de Busca e Filtros', () => {
 
 });
 
+describe('Testes de Exclusão', () => {
+  it('Deletar um post existente (DELETE /posts/:id)', async () => {
+    const response = await request(app).delete('/posts/1');
+    
+    if (response.status === 200) {
+      expect(response.body).toHaveProperty('message', 'Postagem removida com sucesso.');
+    } else {
+      expect(response.status).toBe(404);
+    }
+  })
+});
+
+afterAll(async () => {
+  // Encerra a conexão com o banco após todos os testes
+  await pool.end();
+});

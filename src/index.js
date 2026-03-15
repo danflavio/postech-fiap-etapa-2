@@ -10,8 +10,12 @@ app.use('/posts', postRouter);
 
 app.get('/', (req, res) => {
     res.send('API do Tech Challenge da FIAP - Etapa 2 rodando com variáveis de ambiente');
-})
-
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando na porta ${PORT}`);
+    });
+}
+
+export default app;
